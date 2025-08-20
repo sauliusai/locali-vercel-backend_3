@@ -2,7 +2,6 @@ export const runtime = 'nodejs';
 import OpenAI from 'openai';
 import * as cheerio from 'cheerio';
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
