@@ -1,6 +1,5 @@
 export const runtime = 'nodejs';
 import OpenAI from 'openai';
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -14,6 +13,7 @@ const json = (data, init = {}) =>
 export async function POST(req) {
   try {
     if (!process.env.OPENAI_API_KEY) return json({ error: 'Missing OPENAI_API_KEY' }, { status: 500 });
+    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const body = await req.json();
     const { type = 'ad', targetLocale, image } = body || {};
     if (!targetLocale) return json({ error: 'Provide targetLocale' }, { status: 400 });
