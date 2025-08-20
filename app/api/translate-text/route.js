@@ -21,7 +21,7 @@ export async function POST(req) {
     if (!url || !/^https?:\/\//i.test(url)) return json({ error: 'Provide a valid URL starting with http(s)://' }, { status: 400 });
     if (!targetLocale) return json({ error: 'Provide targetLocale' }, { status: 400 });
     if (!process.env.OPENAI_API_KEY) return json({ error: 'Missing OPENAI_API_KEY' }, { status: 500 });
-
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const html = await fetch(url, { headers: { 'User-Agent': 'LocaliBot/1.0' } }).then(r => r.text());
     const $ = cheerio.load(html);
 
